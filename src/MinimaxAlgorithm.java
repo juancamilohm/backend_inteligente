@@ -33,9 +33,34 @@ public class MinimaxAlgorithm {
 
     // Implementa las funciones auxiliares según tus necesidades
     private static boolean isGameOver(int[][] board) {
-        // Implementa la lógica para verificar si el juego ha terminado
+        // Verificar filas y columnas
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][0] != 0 &&
+                board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+                return true; // Alineación horizontal
+            }
+    
+            if (board[0][i] != 0 &&
+                board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+                return true; // Alineación vertical
+            }
+        }
+    
+        // Verificar diagonales
+        if (board[0][0] != 0 &&
+            board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+            return true; // Alineación diagonal principal
+        }
+    
+        if (board[0][2] != 0 &&
+            board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+            return true; // Alineación diagonal secundaria
+        }
+    
+        // Si no se cumple ninguna condición, el juego no ha terminado
         return false;
     }
+    
 
     private static int evaluateBoard(int[][] board) {
         // Implementa la función de evaluación del tablero
