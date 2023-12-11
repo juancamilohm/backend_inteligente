@@ -1,3 +1,5 @@
+package controller;
+
 public class MinimaxAlgorithm {
 
     private static int currentPlayer = 1;
