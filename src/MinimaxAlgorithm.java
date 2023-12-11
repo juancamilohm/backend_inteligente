@@ -63,9 +63,30 @@ public class MinimaxAlgorithm {
     
 
     private static int evaluateBoard(int[][] board) {
-        // Implementa la función de evaluación del tablero
-        return 0;
+        int score = 0;
+    
+        // Evaluar filas y columnas
+        for (int i = 0; i < board.length; i++) {
+            score += evaluateLine(board[i][0], board[i][1], board[i][2]); // Filas
+            score += evaluateLine(board[0][i], board[1][i], board[2][i]); // Columnas
+        }
+    
+        return score;
     }
+    
+    private static int evaluateLine(int cell1, int cell2, int cell3) {
+        int score = 0;
+    
+        // Evaluar la línea formada por tres celdas
+        if (cell1 == 1 && cell2 == 1 && cell3 == 1) {
+            score += 100; // Alineación de cuadrados
+        } else if (cell1 == 2 && cell2 == 2 && cell3 == 2) {
+            score -= 100; // Alineación de triángulos
+        }
+    
+        return score;
+    }
+    
 
     private static int[] getPossibleMoves(int[][] board) {
         // Implementa la lógica para obtener los movimientos posibles
