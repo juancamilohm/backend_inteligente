@@ -1,4 +1,7 @@
 public class MinimaxAlgorithm {
+
+    private static int currentPlayer = 1;
+
     public static int minimaxAlfaBeta(int[][] board, int depth, int alpha, int beta, boolean isMaximizingPlayer) {
         if (depth == 0 || isGameOver(board)) {
             return evaluateBoard(board);
@@ -111,9 +114,45 @@ public class MinimaxAlgorithm {
     }
     
 
-    private static int[][] makeMove(int[][] board, int move) {
-        // Implementa la lógica para realizar un movimiento en el tablero
-        return new int[0][0];
+    private static int[][] makeMove(int[][] board, int column) {
+        // Encuentra la fila vacía en la columna seleccionada
+        int row = findEmptyRow(board, column);
+    
+        // Clona el tablero para no modificar el original
+        int[][] newBoard = cloneBoard(board);
+    
+        // Coloca la ficha en la posición correspondiente
+        newBoard[row][column] = getCurrentPlayer(); // getCurrentPlayer() debería devolver el valor de la ficha actual
+    
+        switchPlayer();
+        return newBoard;
     }
+    
+    private static int findEmptyRow(int[][] board, int column) {
+        for (int i = board.length - 1; i >= 0; i--) {
+            if (board[i][column] == 0) {
+                return i;
+            }
+        }
+        // Si la columna está llena, esto debería manejarse adecuadamente según tus reglas
+        throw new IllegalStateException("Columna llena, no se puede realizar el movimiento");
+    }
+    
+    private static int[][] cloneBoard(int[][] board) {
+        int[][] clone = new int[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            System.arraycopy(board[i], 0, clone[i], 0, board[i].length);
+        }
+        return clone;
+    }
+
+    private static int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    private static void switchPlayer() {
+        currentPlayer = (currentPlayer == 1) ? 2 : 1;
+    }
+    
 }
 
