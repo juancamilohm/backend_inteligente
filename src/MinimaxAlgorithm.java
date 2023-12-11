@@ -89,9 +89,27 @@ public class MinimaxAlgorithm {
     
 
     private static int[] getPossibleMoves(int[][] board) {
-        // Implementa la lógica para obtener los movimientos posibles
-        return new int[0];
+        // Contar las columnas vacías
+        int emptyColumns = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[0][i] == 0) {
+                emptyColumns++;
+            }
+        }
+    
+        // Crear un array con las columnas vacías
+        int[] possibleMoves = new int[emptyColumns];
+        int index = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[0][i] == 0) {
+                possibleMoves[index] = i;
+                index++;
+            }
+        }
+    
+        return possibleMoves;
     }
+    
 
     private static int[][] makeMove(int[][] board, int move) {
         // Implementa la lógica para realizar un movimiento en el tablero
